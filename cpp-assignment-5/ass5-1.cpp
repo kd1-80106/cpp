@@ -39,15 +39,18 @@ public:
 
     cout << endl;
   }
+  friend int search(student *arr[], int N, int x);
 };
 
 int search(student *arr[], int N, int x)
 {
   for (int i = 0; i < N; i++)
-    if (arr[i].rollno == x)
+    if (arr[i]->rollno == x)
       return i;
   return -1;
 }
+
+
 int menu()
 {
   int choice;
@@ -96,6 +99,12 @@ int main()
         arr[i]->displayStudent();
       }
       break ;
+
+      case 4 :
+      for(int i = 0 ; i < n ; i++)
+      {
+        
+      }
 
       default :
         cout << " wrong choice entered " << endl ;

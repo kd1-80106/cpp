@@ -80,81 +80,6 @@ public:
     }
 };
 
-class employee :public person          // inheritance 
-{
-    private :
-     int id ;
-     float salary;
-     string dept ;
-     date doj ;
-
-     public :
-
-     employee()
-     {
-
-     }
-
-     employee(int id , float salary , string dept ,int day ,int month , int year) : doj(day,month ,year)
-     {
-        this -> id = id ;
-        this -> salary = salary ;
-        this -> dept = dept ;
-
-     }
-
-     int getId()
-     {
-        return this -> id ;
-     }
-
-     float getSalary()
-     {
-        return this -> salary ;
-     }
-
-     string getDept()
-     {
-        return this -> dept ;
-     }
-
-     date getJoiningdate()
-     {
-        return this->doj;
-     }
-     void setJoiningDate(date d1)
-     { 
-        this-> doj.acceptDate() ;
-
-     }
-     void setDeot(string dept)
-     {
-        this -> dept = dept ;
-     }
-
-     void displayEmployee()
-     {
-        cout << " empid  = " << this -> id << endl ;
-        cout << " salary = " << this -> salary << endl ;
-        cout << " dept = " << this -> dept << endl ;
-        this -> doj.displayDate();
-        
-     }
-
-     void acceptEmployee()
-     {
-        cout << " enter empid  " << endl ;
-        cin >> this-> id ;
-        cout << " enter salary " << endl ;
-        cin >> this-> salary ;
-
-        cout << " enter dept " << endl ;
-        cin >> this -> dept ;
-     }
-
-
-
-};
 
 class person
 {
@@ -196,9 +121,12 @@ class person
   {
     this -> address = address ;
   }
-void setBirthDate(date bdate)
+void setBirthDate(int day , int month , int year)
 {
-    this -> bdate.acceptDate();
+    bdate.setDay(day);
+    bdate.setMonth(month);
+    bdate.setYear(year);
+
 }
 
 void displayPerson()
@@ -223,3 +151,118 @@ void acceptPerson()
 }
 
 };
+class employee : public person          // inheritance 
+{
+    private :
+
+     int id ;
+     float salary;
+     string dept ;
+     date doj ;
+
+     public :
+
+     employee()
+     {
+
+     }
+
+     employee(int id , float salary , string dept ,int day ,int month , int year) : doj(day,month ,year)
+     {
+        this -> id = id ;
+        this -> salary = salary ;
+        this -> dept = dept ;
+
+     }
+
+     int getId()
+     {
+        return this -> id ;
+     }
+
+     float getSalary()
+     {
+        return this -> salary ;
+     }
+
+     string getDept()
+     {
+        return this -> dept ;
+     }
+
+     date getJoiningdate()
+     {
+        return this->doj;
+     }
+     void setJoiningDate(int day , int month , int year)
+     { 
+        doj.setDay(day) ;
+        doj.setMonth(month) ;
+        doj.setYear(year) ;
+
+     }
+     void setDeot(string dept)
+     {
+        this -> dept = dept ;
+     }
+
+     void displayEmployee()
+     {
+        cout << " empid  = " << this -> id << endl ;
+        cout << " salary = " << this -> salary << endl ;
+        cout << " dept = " << this -> dept << endl ;
+        this -> doj.displayDate();
+        
+     }
+
+     void acceptEmployee()
+     {
+        cout << " enter empid  " << endl ;
+        cin >> this-> id ;
+        cout << " enter salary " << endl ;
+        cin >> this-> salary ;
+
+        cout << " enter dept " << endl ;
+        cin >> this -> dept ;
+     }
+
+
+
+};
+
+
+int main()
+{
+    
+    // date d1(11,8,2022);
+    // d1.acceptDate();
+    // d1.displayDate();
+   
+    // d1.setDay(22);
+    // d1.setMonth(10);
+    // d1.setYear(2022) ;
+
+    // d1.getDay();
+    // d1.getMonth();
+    // d1.getYear();
+    
+    // d1.displayDate();
+
+    // person p1 ;
+    // p1.acceptPerson();
+    // p1.displayPerson();
+    // p1.set_Address("austria");
+    // p1.set_Name("SCOTT");
+    // p1.setBirthDate(10,10,2000);
+    // p1.displayPerson();
+
+
+    employee e1;
+    e1.acceptEmployee();
+    e1.displayEmployee() ;
+    e1.setDeot("ACCOUNT") ;
+    e1.setJoiningDate(12,12,2011) ;
+    e1.displayEmployee();
+
+    return 0 ;
+}
