@@ -30,6 +30,17 @@ class Matrix
         arr[i] = new int[col];
     }
   }
+
+
+    ~Matrix()
+    {
+        for (int i = 0; i < row; i++)
+        {
+            delete[] arr[i];
+        }
+        delete[] arr;
+    }
+
   
   void acceptArr()
   {
@@ -79,27 +90,101 @@ class Matrix
         }
      }
   }
+
+   void multiply(Matrix *obj1, Matrix *obj2)
+    {
+
+        for (int r = 0; r < row; r++) // 0
+        {
+            for (int c = 0; c < col; c++) // 0
+            {
+                for (int k = 0; k < col; k++) // 00 00
+                {
+                    this->arr[r][c] += obj1->arr[r][k] * obj2->arr[k][c];
+                }
+            }
+        }
+    }
+
+    void transpose()
+    {
+        // int temp = this->columns;
+        // this->columns = this->rows;
+        // this->rows = temp;
+
+        int **array1 = new int *[row];
+        ;
+        for (int i = 0; i < row; i++)
+        {
+            array1[i] = new int[col];
+        }
+
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                array1[j][i] = this->arr[i][j];
+            }
+        }
+        for (int i = 0; i < row; i++)
+        {
+            for (int j = 0; j < col; j++)
+            {
+                this->arr[i][j] = array1[i][j];
+            }
+        }
+        for (int i = 0; i < row; i++)
+        {
+            delete[] array1[i];
+        }
+        delete[] array1;
+    }
+ 
+
+
   
 };
 int main()
 {
-    Matrix m1(2,2) ;
-    m1.acceptArr();
+    int rows, cols;
+    cout << "Enter the Number of Rows and Columns for Matrix 1: ";
+    cin >> rows >> cols;
 
-    
-    Matrix m2(2,2);
-    m2.acceptArr();
+    Matrix object1(rows, cols);
+    object1.acceptArr();
+    cout << "---------****************--------------" << endl;
+    object1.printArr();
+    cout << "---------****************--------------" << endl;
 
-    Matrix m3(2,2);
-    m3.addArr(&m1,&m2) ;
-    m3.printArr();
+    cout << "Enter the Number of Rows and Columns for Matrix 2: ";
+    cin >> rows >> cols;
 
-    m3.subArr(&m1,&m2);
-    m3.printArr(); 
+    Matrix object2(rows, cols);
+    object2.acceptArr();
+    cout << "---------****************--------------" << endl;
+    object2.printArr();
+    cout << "---------****************--------------" << endl;
 
-    
-    
+    Matrix object3(rows, cols);
+    object3.addArr(&object1, &object2);
+    cout << "--------------ADDITION--------------" << endl;
+    object3.printArr();
 
+    object3.subArr(&object1, &object2);
+    cout << "------------SUBSTRACTION--------------" << endl;
+    object3.printArr();
 
-    return 0 ;
+    object3.multiply(&object1, &object2);
+    cout << "--------------MULTIPLY--------------" << endl;
+    object3.printArr();
+
+    object3.transpose();
+    cout << "--------------TRANSPOSE--------------" << endl;
+    object3.printArr();
+
+    return 0;
 }
+
+    
+    
+
